@@ -1,5 +1,5 @@
 {
-  "name": "rcmuser/api",
+  "name": "rcm/user/api",
   "description": "ZF2 based APIs using REST/JSON",
   "type": "library",
   "license": "BSD-3-Clause",
@@ -19,11 +19,14 @@
   ],
   "require": {
     "php": ">=5.5",
-    "zendframework/zendframework": "2.*"
+    "zendframework/zendframework": "2.*",
+    "rwoverdijk/assetmanager": "1.*",
+    "rcm/user": "1.*",
+    "rcm/api-lib": "0.*"
   },
   "autoload": {
     "psr-4": {
-      "RcmUser\\Api\\": "src/"
+      "RcmUser\Api\Api\\": "src/"
     }
   }
 }
