@@ -3,34 +3,31 @@
 namespace RcmUser\Api\Controller;
 
 use RcmUser\Provider\RcmUserAclResourceProvider;
+use RcmUser\Result;
 use Zend\View\Model\JsonModel;
 
 /**
- * Class AdminApiAclRulesByRolesController
- *
- * AdminApiAclRulesByRolesController
+ * Class AclResourcesController
  *
  * PHP version 5
  *
  * @category  Reliv
  * @package   RcmUser\Api\Controller
  * @author    James Jervis <jjervis@relivinc.com>
- * @copyright 2014 Reliv International
+ * @copyright 2015 Reliv International
  * @license   License.txt New BSD License
  * @version   Release: <package_version>
  * @link      https://github.com/reliv
  */
-class AdminApiAclRulesByRolesController extends AbstractAdminApiController
+class AclResourcesController extends AbstractAdminApiController
 {
-
     /**
      * getList
      *
-     * @return mixed|\Zend\Stdlib\ResponseInterface|JsonModel
+     * @return mixed|JsonModel
      */
     public function getList()
     {
-
         // ACCESS CHECK
         if (!$this->isAllowed(
             RcmUserAclResourceProvider::RESOURCE_ID_ACL,
@@ -40,13 +37,21 @@ class AdminApiAclRulesByRolesController extends AbstractAdminApiController
             return $this->getNotAllowedResponse();
         }
 
-        /** @var \RcmUser\Acl\Service\AclDataService $aclDataService */
-        $aclDataService = $this->getServiceLocator()->get(
-            'RcmUser\Acl\AclDataService'
+        /** @var \RcmUser\Acl\Service\AclResourceService $aclResourceService */
+        $aclResourceService = $this->getServiceLocator()->get(
+            'RcmUser\Acl\Service\AclResourceService'
         );
+/** @var \RcmUser\Acl\Service\AuthorizeService $acl */
+        $acl = $this->getServiceLocator()->get(
+            'RcmUser\Acl\Service\AuthorizeService'
+        );
+        var_dump($acl->getRoles()); die;
+        // Increase time limit as this can be a long call
+        set_time_limit(0);
 
         try {
-            $result = $aclDataService->getRulesByRoles();
+            $resources = $aclResourceService->getResourcesWithNamespace();
+            $result = new Result($resources);
         } catch (\Exception $e) {
             return $this->getExceptionResponse($e);
         }

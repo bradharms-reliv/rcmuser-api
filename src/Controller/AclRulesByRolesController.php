@@ -3,33 +3,32 @@
 namespace RcmUser\Api\Controller;
 
 use RcmUser\Provider\RcmUserAclResourceProvider;
-use RcmUser\Result;
 use Zend\View\Model\JsonModel;
 
 /**
- * Class AdminApiAclResourcesController
- *
- * AdminApiAclResourcesController
+ * Class AclRulesByRolesController
  *
  * PHP version 5
  *
  * @category  Reliv
  * @package   RcmUser\Api\Controller
  * @author    James Jervis <jjervis@relivinc.com>
- * @copyright 2014 Reliv International
+ * @copyright 2015 Reliv International
  * @license   License.txt New BSD License
  * @version   Release: <package_version>
  * @link      https://github.com/reliv
  */
-class AdminApiAclResourcesController extends AbstractAdminApiController
+class AclRulesByRolesController extends AbstractAdminApiController
 {
+
     /**
      * getList
      *
-     * @return mixed|JsonModel
+     * @return mixed|\Zend\Stdlib\ResponseInterface|JsonModel
      */
     public function getList()
     {
+
         // ACCESS CHECK
         if (!$this->isAllowed(
             RcmUserAclResourceProvider::RESOURCE_ID_ACL,
@@ -39,14 +38,13 @@ class AdminApiAclResourcesController extends AbstractAdminApiController
             return $this->getNotAllowedResponse();
         }
 
-        $aclResourceService = $this->getServiceLocator()->get(
-            'RcmUser\Acl\Service\AclResourceService'
+        /** @var \RcmUser\Acl\Service\AclDataService $aclDataService */
+        $aclDataService = $this->getServiceLocator()->get(
+            'RcmUser\Acl\AclDataService'
         );
 
         try {
-            $resources = $aclResourceService->getResourcesWithNamespace();
-            $result = new Result($resources);
-
+            $result = $aclDataService->getRulesByRoles();
         } catch (\Exception $e) {
             return $this->getExceptionResponse($e);
         }

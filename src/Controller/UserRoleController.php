@@ -7,21 +7,19 @@ use RcmUser\Result;
 use RcmUser\User\Entity\User;
 
 /**
- * Class AdminApiUserRolesController
- *
- * AdminApiUserRolesController
+ * Class UserRoleController
  *
  * PHP version 5
  *
  * @category  Reliv
  * @package   RcmUser\Api\Controller
  * @author    James Jervis <jjervis@relivinc.com>
- * @copyright 2014 Reliv International
+ * @copyright 2015 Reliv International
  * @license   License.txt New BSD License
  * @version   Release: <package_version>
  * @link      https://github.com/reliv
  */
-class AdminApiUserRolesController extends AbstractAdminApiController
+class UserRoleController extends AbstractAdminApiController
 {
     /**
      * get GET
@@ -63,7 +61,7 @@ class AdminApiUserRolesController extends AbstractAdminApiController
     /**
      * create POST
      *
-     * @param array $data User with roles
+     * @param array $data User with role
      *
      * @return string
      */
@@ -92,73 +90,18 @@ class AdminApiUserRolesController extends AbstractAdminApiController
 
             $user = new User($data['userId']);
 
-            if (!isset($data['roles'])) {
+            if (!isset($data['role'])) {
                 $result
                     = new Result(null, Result::CODE_FAIL, "No user roles recieved.");
 
                 return $this->getJsonResponse($result);
             }
 
-            $newRoles = $data['roles'];
+            $newRole = (string)$data['role'];
 
-            $result = $userRoleService->createRoles(
+            $result = $userRoleService->addRole(
                 $user,
-                $newRoles
-            );
-
-        } catch (\Exception $e) {
-            return $this->getExceptionResponse($e);
-        }
-
-        return $this->getJsonResponse($result);
-    }
-
-    /**
-     * update PUT
-     *
-     * @param string $userId User id
-     * @param array  $roles  Updated roles
-     *
-     * @return array|mixed
-     */
-    public function update(
-        $userId,
-        $roles
-    ) {
-        // ACCESS CHECK
-        if (!$this->isAllowed(
-            RcmUserAclResourceProvider::RESOURCE_ID_USER,
-            'update'
-        )
-        ) {
-            return $this->getNotAllowedResponse();
-        }
-
-        /** @var \RcmUser\User\Service\UserRoleService $userRoleService */
-        $userRoleService = $this->getServiceLocator()->get(
-            'RcmUser\User\Service\UserRoleService'
-        );
-
-        try {
-            if (empty($userId)) {
-                $result
-                    = new Result(null, Result::CODE_FAIL, "No user id recieved.");
-
-                return $this->getJsonResponse($result);
-            }
-
-            $user = new User($userId);
-
-            if (empty($roles)) {
-                $result
-                    = new Result(null, Result::CODE_FAIL, "No user roles recieved.");
-
-                return $this->getJsonResponse($result);
-            }
-
-            $result = $userRoleService->updateRoles(
-                $user,
-                $roles
+                $newRole
             );
 
         } catch (\Exception $e) {
@@ -171,14 +114,11 @@ class AdminApiUserRolesController extends AbstractAdminApiController
     /**
      * delete DELETE
      *
-     * @param string $data User id with roles to delete
-     *                     {
-     *                     userId: "{ID}",
-     *                     roles: [
-     *                     "{roleId1}",
-     *                     "{roleId2}"
-     *                     ]
-     *                     }
+     * @param string $data User id with role to delete
+     *                     array(
+     *                     "userId" => "{ID}",
+     *                     "role" => "{roleId}"
+     *                     )
      *
      * @return string
      */
@@ -198,11 +138,6 @@ class AdminApiUserRolesController extends AbstractAdminApiController
             'RcmUser\User\Service\UserRoleService'
         );
 
-        // @todo implement this
-        $result = new Result(null, Result::CODE_FAIL, "Method not available.");
-
-        return $this->getJsonResponse($result);
-
         try {
             $data = json_decode(
                 urldecode($data),
@@ -218,18 +153,18 @@ class AdminApiUserRolesController extends AbstractAdminApiController
 
             $user = new User($data['userId']);
 
-            if (!isset($data['roles'])) {
+            if (!isset($data['role'])) {
                 $result
-                    = new Result(null, Result::CODE_FAIL, "No user roles recieved.");
+                    = new Result(null, Result::CODE_FAIL, "No user role recieved.");
 
                 return $this->getJsonResponse($result);
             }
 
-            $deleteRoles = $data['roles'];
+            $deleteRole = (string)$data['role'];
 
-            $result = $userRoleService->updateRoles(
+            $result = $userRoleService->removeRole(
                 $user,
-                $deleteRoles
+                $deleteRole
             );
 
         } catch (\Exception $e) {

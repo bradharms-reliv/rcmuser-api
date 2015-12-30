@@ -1,6 +1,6 @@
 <?php
 
-namespace RcmUser\Api\ApiController;
+namespace RcmUser\Api\Controller;
 
 use RcmUser\Provider\RcmUserAclResourceProvider;
 use RcmUser\InputFilter\LoginInputFilter;

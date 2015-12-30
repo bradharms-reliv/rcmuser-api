@@ -7,21 +7,19 @@ use RcmUser\Provider\RcmUserAclResourceProvider;
 use Zend\View\Model\JsonModel;
 
 /**
- * Class AdminApiAclRuleController
- *
- * AdminApiAclRuleController
+ * Class AclRuleController
  *
  * PHP version 5
  *
  * @category  Reliv
  * @package   RcmUser\Api\Controller
  * @author    James Jervis <jjervis@relivinc.com>
- * @copyright 2014 Reliv International
+ * @copyright 2015 Reliv International
  * @license   License.txt New BSD License
  * @version   Release: <package_version>
  * @link      https://github.com/reliv
  */
-class AdminApiAclRuleController extends AbstractAdminApiController
+class AclRuleController extends AbstractAdminApiController
 {
     /**
      * get
