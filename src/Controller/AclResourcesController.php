@@ -41,11 +41,7 @@ class AclResourcesController extends AbstractAdminApiController
         $aclResourceService = $this->getServiceLocator()->get(
             'RcmUser\Acl\Service\AclResourceService'
         );
-/** @var \RcmUser\Acl\Service\AuthorizeService $acl */
-        $acl = $this->getServiceLocator()->get(
-            'RcmUser\Acl\Service\AuthorizeService'
-        );
-        var_dump($acl->getRoles()); die;
+
         // Increase time limit as this can be a long call
         set_time_limit(0);
 
