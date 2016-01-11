@@ -37,16 +37,16 @@ class AclResourcesController extends AbstractAdminApiController
             return $this->getNotAllowedResponse();
         }
 
-        /** @var \RcmUser\Acl\Service\AclResourceService $aclResourceService */
-        $aclResourceService = $this->getServiceLocator()->get(
-            'RcmUser\Acl\Service\AclResourceService'
+        /** @var \RcmUser\Acl\Service\AclResourceNsArrayService $aclResourceNsArrayService */
+        $aclResourceNsArrayService = $this->getServiceLocator()->get(
+            'RcmUser\Acl\Service\AclResourceNsArrayService'
         );
 
         // Increase time limit as this can be a long call
         set_time_limit(0);
 
         try {
-            $resources = $aclResourceService->getResourcesWithNamespace();
+            $resources = $aclResourceNsArrayService->getResourcesWithNamespace();
             $result = new Result($resources);
         } catch (\Exception $e) {
             return $this->getExceptionResponse($e);
