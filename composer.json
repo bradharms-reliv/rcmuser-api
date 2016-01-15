@@ -21,7 +21,7 @@
     "php": ">=5.5",
     "zendframework/zendframework": "2.*",
     "rcm/user": "1.*",
-    "rcm/api-lib": "1.*"
+    "rcm/api-lib": "0.*"
   },
   "autoload": {
     "psr-4": {
