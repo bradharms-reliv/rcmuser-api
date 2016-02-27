@@ -107,6 +107,10 @@ class UserController extends AbstractController
             return $this->logout();
         }
 
+        if ($id == 'new') {
+            return $this->createNew($data);
+        }
+
         // @todo Write create method
         return parent::create($data);
     }
@@ -177,5 +181,41 @@ class UserController extends AbstractController
         $rcmUserService->clearIdentity();
 
         return $this->getApiResponse(null);
+    }
+
+    public function createNew($data)
+    {
+        // @todo There may be cases where we want to expose this
+        //       For now it is for admins only
+        if (!$this->isAllowed(
+            RcmUserAclResourceProvider::RESOURCE_ID_USER,
+            'create'
+        )
+        ) {
+            return $this->getApiResponse(
+                null,
+                401
+            );
+        }
+
+        $rcmUserService = $this->getRcmUserService();
+
+        $newUser = $rcmUserService->buildNewUser();
+
+        // @todo we might filter here - there is low level filtering tho
+
+        $newUser->populate($data);
+
+        $result = $rcmUserService->createUser($newUser);
+
+        if (!$result->isSuccess()) {
+            return $this->getApiResponse(
+                null,
+                500,
+                $result->getMessagesString()
+            );
+        }
+
+        return $this->getApiResponse($result->getUser());
     }
 }
