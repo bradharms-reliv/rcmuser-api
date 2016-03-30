@@ -183,6 +183,14 @@ class UserController extends AbstractController
         return $this->getApiResponse(null);
     }
 
+    /**
+     * createNew
+     *
+     * @param $data
+     *
+     * @return \Reliv\RcmApiLib\Http\ApiResponse
+     * @throws \RcmUser\Exception\RcmUserException
+     */
     public function createNew($data)
     {
         // @todo There may be cases where we want to expose this
