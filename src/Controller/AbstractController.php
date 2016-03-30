@@ -6,7 +6,6 @@ use RcmUser\Provider\RcmUserAclResourceProvider;
 use RcmUser\Result;
 use Reliv\RcmApiLib\Controller\AbstractRestfulJsonController;
 use Zend\Http\Response;
-use Zend\View\Model\JsonModel;
 
 /**
  * Class AbstractController
@@ -104,10 +103,7 @@ class AbstractController extends AbstractRestfulJsonController
      */
     public function getJsonResponse($result)
     {
-        $view = new JsonModel();
-        $view->setTerminal(true);
-
-        $response = $this->getResponse();
+        $response = new Response();
 
         $json = json_encode($result);
 
