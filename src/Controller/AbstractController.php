@@ -6,7 +6,7 @@ use RcmUser\Provider\RcmUserAclResourceProvider;
 use RcmUser\Result;
 use Reliv\RcmApiLib\Controller\AbstractRestfulJsonController;
 use Zend\Http\Response;
-use Zend\View\Model\JsonModel;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class AbstractController
@@ -23,6 +23,21 @@ use Zend\View\Model\JsonModel;
  */
 class AbstractController extends AbstractRestfulJsonController
 {
+    /**
+     * @var ServiceLocatorInterface
+     */
+    protected $serviceLocator;
+
+    /**
+     * AbstractController constructor.
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     */
+    public function __construct(ServiceLocatorInterface $serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+    }
+
     /**
      * getRcmUserService
      *
@@ -86,6 +101,7 @@ class AbstractController extends AbstractRestfulJsonController
             Result::CODE_FAIL,
             "Code: " . $e->getCode() . ": " . $e->getMessage()
         );
+
         /*
         . " | " .$e->getFile() .
          ":" . $e->getLine() .
@@ -104,10 +120,7 @@ class AbstractController extends AbstractRestfulJsonController
      */
     public function getJsonResponse($result)
     {
-        $view = new JsonModel();
-        $view->setTerminal(true);
-
-        $response = $this->getResponse();
+        $response = new Response();
 
         $json = json_encode($result);
 

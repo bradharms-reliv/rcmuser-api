@@ -20,6 +20,7 @@
   "require": {
     "php": ">=5.5",
     "zendframework/zendframework": "2.*",
+    "reliv/zf-config-factories": "3.*",
     "rcm/user": "1.*",
     "rcm/api-lib": "0.*"
   },

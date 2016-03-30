@@ -20,7 +20,6 @@ use Zend\View\Model\JsonModel;
  */
 class AclDefaultUserRoleController extends AbstractAdminApiController
 {
-
     /**
      * getList
      *
