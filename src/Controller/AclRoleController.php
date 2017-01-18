@@ -39,7 +39,7 @@ class AclRoleController extends AbstractAdminApiController
 
         /** @var \RcmUser\Acl\Service\AclDataService $aclDataService */
         $aclDataService = $this->getServiceLocator()->get(
-            'RcmUser\Acl\AclDataService'
+            \RcmUser\Acl\Service\AclDataService::class
         );
 
         try {
@@ -70,7 +70,7 @@ class AclRoleController extends AbstractAdminApiController
         }
 
         $aclDataService = $this->getServiceLocator()->get(
-            'RcmUser\Acl\AclDataService'
+            \RcmUser\Acl\Service\AclDataService::class
         );
 
         try {
@@ -103,7 +103,7 @@ class AclRoleController extends AbstractAdminApiController
         }
 
         $aclDataService = $this->getServiceLocator()->get(
-            'RcmUser\Acl\AclDataService'
+            \RcmUser\Acl\Service\AclDataService::class
         );
 
         try {
@@ -136,7 +136,7 @@ class AclRoleController extends AbstractAdminApiController
         }
 
         $aclDataService = $this->getServiceLocator()->get(
-            'RcmUser\Acl\AclDataService'
+            \RcmUser\Acl\Service\AclDataService::class
         );
 
         try {

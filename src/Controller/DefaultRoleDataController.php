@@ -39,7 +39,7 @@ class DefaultRoleDataController extends AbstractController
 
         /** @var $aclDataService \RcmUser\Acl\Service\AclDataService */
         $aclDataService = $this->getServiceLocator()->get(
-            'RcmUser\Acl\AclDataService'
+            \RcmUser\Acl\Service\AclDataService::class
         );
 
         $data = [
