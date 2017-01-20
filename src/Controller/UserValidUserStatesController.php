@@ -39,7 +39,7 @@ class UserValidUserStatesController extends AbstractAdminApiController
 
         /** @var \RcmUser\User\Service\UserDataService $userDataService */
         $userDataService = $this->getServiceLocator()->get(
-            'RcmUser\User\Service\UserDataService'
+            \RcmUser\User\Service\UserDataService::class
         );
 
         try {
