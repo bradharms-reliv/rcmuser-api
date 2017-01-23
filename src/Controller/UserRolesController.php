@@ -41,7 +41,7 @@ class UserRolesController extends AbstractAdminApiController
 
         /** @var \RcmUser\User\Service\UserRoleService $userRoleService */
         $userRoleService = $this->getServiceLocator()->get(
-            'RcmUser\User\Service\UserRoleService'
+            \RcmUser\User\Service\UserRoleService::class
         );
 
         try {
@@ -77,7 +77,7 @@ class UserRolesController extends AbstractAdminApiController
         }
         /** @var \RcmUser\User\Service\UserRoleService $userRoleService */
         $userRoleService = $this->getServiceLocator()->get(
-            'RcmUser\User\Service\UserRoleService'
+            \RcmUser\User\Service\UserRoleService::class
         );
 
         try {
@@ -134,7 +134,7 @@ class UserRolesController extends AbstractAdminApiController
 
         /** @var \RcmUser\User\Service\UserRoleService $userRoleService */
         $userRoleService = $this->getServiceLocator()->get(
-            'RcmUser\User\Service\UserRoleService'
+            \RcmUser\User\Service\UserRoleService::class
         );
 
         try {
@@ -193,7 +193,7 @@ class UserRolesController extends AbstractAdminApiController
 
         /** @var \RcmUser\User\Service\UserRoleService $userRoleService */
         $userRoleService = $this->getServiceLocator()->get(
-            'RcmUser\User\Service\UserRoleService'
+            \RcmUser\User\Service\UserRoleService::class
         );
 
         // @todo implement this

@@ -41,7 +41,7 @@ class UserAdminController extends AbstractAdminApiController
 
         /** @var \RcmUser\User\Service\UserDataService $userDataService */
         $userDataService = $this->getServiceLocator()->get(
-            'RcmUser\User\Service\UserDataService'
+            \RcmUser\User\Service\UserDataService::class
         );
 
         try {
@@ -73,7 +73,7 @@ class UserAdminController extends AbstractAdminApiController
 
         /** @var \RcmUser\User\Service\UserDataService $userDataService */
         $userDataService = $this->getServiceLocator()->get(
-            'RcmUser\User\Service\UserDataService'
+            \RcmUser\User\Service\UserDataService::class
         );
 
         try {
@@ -108,7 +108,7 @@ class UserAdminController extends AbstractAdminApiController
 
         /** @var \RcmUser\User\Service\UserDataService $userDataService */
         $userDataService = $this->getServiceLocator()->get(
-            'RcmUser\User\Service\UserDataService'
+            \RcmUser\User\Service\UserDataService::class
         );
 
         try {
@@ -144,15 +144,19 @@ class UserAdminController extends AbstractAdminApiController
 
         /** @var \RcmUser\User\Service\UserDataService $userDataService */
         $userDataService = $this->getServiceLocator()->get(
-            'RcmUser\User\Service\UserDataService'
+            \RcmUser\User\Service\UserDataService::class
         );
 
         try {
             //$data = json_decode($this->getRequest()->getContent());
-            $currentUser = $this->rcmUserGetCurrentUser();
+            $currentUser = $this->getRcmUserService()->getCurrentUser(new User());
 
             if ($id == $currentUser->getId()) {
-                return new Result($id, Result::CODE_FAIL, "Cannot delete yourself.");
+                return new Result(
+                    $id,
+                    Result::CODE_FAIL,
+                    "Cannot delete yourself."
+                );
             }
 
             // Build user from request
@@ -190,7 +194,7 @@ class UserAdminController extends AbstractAdminApiController
 
         /** @var \RcmUser\User\Service\UserDataService $userDataService */
         $userDataService = $this->getServiceLocator()->get(
-            'RcmUser\User\Service\UserDataService'
+            \RcmUser\User\Service\UserDataService::class
         );
 
         try {
@@ -204,8 +208,11 @@ class UserAdminController extends AbstractAdminApiController
             );
             if (!$isAllowChangeCreds) {
                 if ($user->getPassword() !== null) {
-                    $result
-                        = new Result($user, Result::CODE_FAIL, "Not allowed to change username and password.");
+                    $result = new Result(
+                        $user,
+                        Result::CODE_FAIL,
+                        "Not allowed to change username and password."
+                    );
 
                     return $this->getJsonResponse($result);
                 }
@@ -233,7 +240,7 @@ class UserAdminController extends AbstractAdminApiController
      *
      * @param array $data data
      *
-     * @return void
+     * @return User
      */
     protected function buildUser($data)
     {
