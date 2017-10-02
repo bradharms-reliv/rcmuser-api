@@ -4,23 +4,14 @@ namespace RcmUser\Api\Controller;
 
 use RcmUser\Acl\Entity\AclRule;
 use RcmUser\Provider\RcmUserAclResourceProvider;
+use RcmUser\User\Entity\UserInterface;
 use RcmUser\User\Entity\User;
 use RcmUser\User\Entity\UserRoleProperty;
 use RcmUser\User\Result;
 use Zend\View\Model\JsonModel;
 
 /**
- * Class UserAdminController
- *
- * PHP version 5
- *
- * @category  Reliv
- * @package   RcmUser\Api\Controller
- * @author    James Jervis <jjervis@relivinc.com>
- * @copyright 2015 Reliv International
- * @license   License.txt New BSD License
- * @version   Release: <package_version>
- * @link      https://github.com/reliv
+ * @author James Jervis - https://github.com/jerv13
  */
 class UserAdminController extends AbstractAdminApiController
 {
@@ -160,7 +151,7 @@ class UserAdminController extends AbstractAdminApiController
             }
 
             // Build user from request
-            $user = new user($id);
+            $user = new User($id);
 
             $result = $userDataService->deleteUser($user);
 
@@ -240,7 +231,7 @@ class UserAdminController extends AbstractAdminApiController
      *
      * @param array $data data
      *
-     * @return User
+     * @return UserInterface
      */
     protected function buildUser($data)
     {

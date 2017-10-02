@@ -7,17 +7,7 @@ use RcmUser\Result;
 use RcmUser\User\Entity\User;
 
 /**
- * Class UserRoleController
- *
- * PHP version 5
- *
- * @category  Reliv
- * @package   RcmUser\Api\Controller
- * @author    James Jervis <jjervis@relivinc.com>
- * @copyright 2015 Reliv International
- * @license   License.txt New BSD License
- * @version   Release: <package_version>
- * @link      https://github.com/reliv
+ * @author James Jervis - https://github.com/jerv13
  */
 class UserRoleController extends AbstractAdminApiController
 {
@@ -82,8 +72,11 @@ class UserRoleController extends AbstractAdminApiController
 
         try {
             if (!isset($data['userId'])) {
-                $result
-                    = new Result(null, Result::CODE_FAIL, "No user id recieved.");
+                $result = new Result(
+                    null,
+                    Result::CODE_FAIL,
+                    "No user id received."
+                );
 
                 return $this->getJsonResponse($result);
             }
@@ -91,8 +84,11 @@ class UserRoleController extends AbstractAdminApiController
             $user = new User($data['userId']);
 
             if (!isset($data['role'])) {
-                $result
-                    = new Result(null, Result::CODE_FAIL, "No user roles recieved.");
+                $result = new Result(
+                    null,
+                    Result::CODE_FAIL,
+                    "No user roles received."
+                );
 
                 return $this->getJsonResponse($result);
             }
@@ -145,8 +141,11 @@ class UserRoleController extends AbstractAdminApiController
             );
 
             if (!isset($data['userId'])) {
-                $result
-                    = new Result(null, Result::CODE_FAIL, "No user id recieved.");
+                $result = new Result(
+                    null,
+                    Result::CODE_FAIL,
+                    "No user id received."
+                );
 
                 return $this->getJsonResponse($result);
             }
@@ -154,8 +153,11 @@ class UserRoleController extends AbstractAdminApiController
             $user = new User($data['userId']);
 
             if (!isset($data['role'])) {
-                $result
-                    = new Result(null, Result::CODE_FAIL, "No user role recieved.");
+                $result = new Result(
+                    null,
+                    Result::CODE_FAIL,
+                    "No user role received."
+                );
 
                 return $this->getJsonResponse($result);
             }
