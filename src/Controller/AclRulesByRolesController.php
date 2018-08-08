@@ -27,7 +27,6 @@ class AclRulesByRolesController extends AbstractAdminApiController
      */
     public function getList()
     {
-
         // ACCESS CHECK
         if (!$this->isAllowed(
             RcmUserAclResourceProvider::RESOURCE_ID_ACL,
