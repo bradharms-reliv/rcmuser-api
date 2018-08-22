@@ -8,8 +8,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use RcmUser\Api\Acl\IsAllowed;
 use RcmUser\Api\MiddlewareResponse\GetNotAllowedResponse;
-use RcmUser\Result;
-use Zend\Diactoros\Response\JsonResponse;
 
 /**
  * @author James Jervis - https://github.com/jerv13
